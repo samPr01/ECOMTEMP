@@ -14,6 +14,12 @@ import Profile from './pages/Profile';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
 import ProtectedRoute, { AdminRoute } from './components/auth/ProtectedRoute';
+// Import new customer service pages
+import Contact from './pages/Contact';
+import ReturnsExchanges from './pages/ReturnsExchanges';
+import SizeGuide from './pages/SizeGuide';
+import FAQ from './pages/FAQ';
+import TrackOrder from './pages/TrackOrder';
 import './App.css';
 
 function App() {
@@ -50,6 +56,12 @@ function App() {
                 <Admin />
               </AdminRoute>
             } />
+            {/* Customer Service Routes */}
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/returns-exchanges" element={<ReturnsExchanges />} />
+            <Route path="/size-guide" element={<SizeGuide />} />
+            <Route path="/faq" element={<FAQ />} />
+            <Route path="/track-order" element={<TrackOrder />} />
           </Routes>
         </main>
         <Footer />

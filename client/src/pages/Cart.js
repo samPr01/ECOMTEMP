@@ -117,13 +117,13 @@ const Cart = () => {
                       Size: {item.size}
                     </p>
                   )}
-                  <p style={{ 
-                    fontSize: '20px', 
-                    fontWeight: '700', 
+                  <p style={{
+                    fontSize: '18px',
+                    fontWeight: '600',
                     color: '#2563eb',
                     marginBottom: '16px'
                   }}>
-                    ${item.product.price}
+                    ₹{item.product.price}
                   </p>
 
                   {/* Quantity Controls */}
@@ -179,7 +179,7 @@ const Cart = () => {
                     color: '#1f2937',
                     marginBottom: '16px'
                   }}>
-                    ${(item.product.price * item.quantity).toFixed(2)}
+                    ₹{(item.product.price * item.quantity).toFixed(2)}
                   </p>
                   <button
                     onClick={() => handleRemoveItem(item.id)}
@@ -222,7 +222,7 @@ const Cart = () => {
                 color: '#6b7280'
               }}>
                 <span>Subtotal</span>
-                <span>${total}</span>
+                <span>₹{total}</span>
               </div>
               <div style={{ 
                 display: 'flex', 
@@ -231,7 +231,7 @@ const Cart = () => {
                 color: '#6b7280'
               }}>
                 <span>Shipping</span>
-                <span>{parseFloat(total) >= 50 ? 'Free' : '$5.99'}</span>
+                <span>{parseFloat(total) >= 500 ? 'Free' : '₹59'}</span>
               </div>
               <div style={{ 
                 display: 'flex', 
@@ -240,7 +240,7 @@ const Cart = () => {
                 color: '#6b7280'
               }}>
                 <span>Tax</span>
-                <span>${(parseFloat(total) * 0.08).toFixed(2)}</span>
+                <span>₹{(parseFloat(total) * 0.08).toFixed(2)}</span>
               </div>
             </div>
 
@@ -257,16 +257,16 @@ const Cart = () => {
               }}>
                 <span>Total</span>
                 <span>
-                  ${(
+                  ₹{(
                     parseFloat(total) + 
-                    (parseFloat(total) >= 50 ? 0 : 5.99) + 
+                    (parseFloat(total) >= 500 ? 0 : 59) + 
                     (parseFloat(total) * 0.08)
                   ).toFixed(2)}
                 </span>
               </div>
             </div>
 
-            {parseFloat(total) < 50 && (
+            {parseFloat(total) < 500 && (
               <div style={{
                 background: '#fef3c7',
                 border: '1px solid #f59e0b',
@@ -276,7 +276,7 @@ const Cart = () => {
                 fontSize: '14px',
                 color: '#92400e'
               }}>
-                Add ${(50 - parseFloat(total)).toFixed(2)} more for free shipping!
+                Add ₹{(500 - parseFloat(total)).toFixed(2)} more for free shipping!
               </div>
             )}
 

@@ -174,7 +174,7 @@ const ProductDetail = () => {
 
             <div style={{ marginBottom: '24px' }}>
               <span style={{ fontSize: '32px', fontWeight: '700', color: '#2563eb' }}>
-                ${product.price}
+                ₹{product.price}
               </span>
               {product.discount > 0 && (
                 <>
@@ -184,7 +184,7 @@ const ProductDetail = () => {
                     marginLeft: '12px',
                     fontSize: '20px'
                   }}>
-                    ${product.originalPrice}
+                    ₹{product.originalPrice}
                   </span>
                   <span style={{ 
                     background: '#ef4444', 

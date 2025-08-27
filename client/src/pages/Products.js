@@ -70,8 +70,8 @@ const Products = () => {
   const brands = ['Nike', 'Adidas', 'Zara', 'H&M', 'Apple', 'Samsung', 'IKEA', 'Uniqlo'];
 
   return (
-    <div style={{ padding: '40px 0' }}>
-      <div className="container">
+    <div style={{ padding: '40px 0', width: '100%', maxWidth: '100vw', overflowX: 'hidden' }}>
+      <div className="container" style={{ maxWidth: '100%', padding: '0 20px' }}>
         <div style={{ marginBottom: '40px' }}>
           <h1 style={{ fontSize: '32px', fontWeight: '700', marginBottom: '16px' }}>
             {category ? categoryNames[category] : 'All Products'}
@@ -83,7 +83,7 @@ const Products = () => {
           )}
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '250px 1fr', gap: '40px' }}>
+        <div className="products-layout">
           {/* Filters Sidebar */}
           <div style={{ background: 'white', padding: '24px', borderRadius: '12px', height: 'fit-content' }}>
             <h3 style={{ marginBottom: '20px', fontSize: '18px', fontWeight: '600' }}>Filters</h3>
@@ -169,7 +169,7 @@ const Products = () => {
           </div>
 
           {/* Products Grid */}
-          <div>
+          <div style={{ minWidth: 0, overflow: 'hidden' }}>
             {loading ? (
               <div className="spinner"></div>
             ) : products.length > 0 ? (
@@ -186,31 +186,85 @@ const Products = () => {
                     display: 'flex', 
                     justifyContent: 'center', 
                     gap: '8px', 
-                    marginTop: '40px' 
+                    marginTop: '40px',
+                    flexWrap: 'wrap',
+                    maxWidth: '100%'
                   }}>
                     {currentPage > 1 && (
                       <button
                         className="btn btn-outline"
                         onClick={() => handlePageChange(currentPage - 1)}
+                        style={{ minWidth: 'auto', padding: '8px 12px' }}
                       >
                         Previous
                       </button>
                     )}
                     
-                    {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
-                      <button
-                        key={page}
-                        className={`btn ${page === currentPage ? 'btn-primary' : 'btn-outline'}`}
-                        onClick={() => handlePageChange(page)}
-                      >
-                        {page}
-                      </button>
-                    ))}
+                    {/* Show limited page numbers to prevent horizontal overflow */}
+                    {(() => {
+                      const maxVisiblePages = 5;
+                      let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+                      let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+                      
+                      if (endPage - startPage + 1 < maxVisiblePages) {
+                        startPage = Math.max(1, endPage - maxVisiblePages + 1);
+                      }
+                      
+                      const pages = [];
+                      
+                      if (startPage > 1) {
+                        pages.push(
+                          <button
+                            key={1}
+                            className="btn btn-outline"
+                            onClick={() => handlePageChange(1)}
+                            style={{ minWidth: '40px', padding: '8px 12px' }}
+                          >
+                            1
+                          </button>
+                        );
+                        if (startPage > 2) {
+                          pages.push(<span key="ellipsis1" style={{ padding: '8px 4px' }}>...</span>);
+                        }
+                      }
+                      
+                      for (let i = startPage; i <= endPage; i++) {
+                        pages.push(
+                          <button
+                            key={i}
+                            className={`btn ${i === currentPage ? 'btn-primary' : 'btn-outline'}`}
+                            onClick={() => handlePageChange(i)}
+                            style={{ minWidth: '40px', padding: '8px 12px' }}
+                          >
+                            {i}
+                          </button>
+                        );
+                      }
+                      
+                      if (endPage < totalPages) {
+                        if (endPage < totalPages - 1) {
+                          pages.push(<span key="ellipsis2" style={{ padding: '8px 4px' }}>...</span>);
+                        }
+                        pages.push(
+                          <button
+                            key={totalPages}
+                            className="btn btn-outline"
+                            onClick={() => handlePageChange(totalPages)}
+                            style={{ minWidth: '40px', padding: '8px 12px' }}
+                          >
+                            {totalPages}
+                          </button>
+                        );
+                      }
+                      
+                      return pages;
+                    })()}
                     
                     {currentPage < totalPages && (
                       <button
                         className="btn btn-outline"
                         onClick={() => handlePageChange(currentPage + 1)}
+                        style={{ minWidth: 'auto', padding: '8px 12px' }}
                       >
                         Next
                       </button>

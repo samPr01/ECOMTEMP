@@ -181,7 +181,7 @@ const OrderConfirmation = () => {
                   </div>
                   <div style={{ textAlign: 'right' }}>
                     <p style={{ margin: 0, fontWeight: '600', fontSize: '16px' }}>
-                      ${(item.price * item.quantity).toFixed(2)}
+                      ₹{(item.price * item.quantity).toFixed(2)}
                     </p>
                   </div>
                 </div>
@@ -206,7 +206,7 @@ const OrderConfirmation = () => {
                     color: '#6b7280'
                   }}>
                     <span>Subtotal:</span>
-                    <span>${(parseFloat(order.total) - 5.99 - (parseFloat(order.total) - 5.99) * 0.08).toFixed(2)}</span>
+                    <span>₹{(parseFloat(order.total) - 59 - (parseFloat(order.total) - 59) * 0.08).toFixed(2)}</span>
                   </div>
                   <div style={{ 
                     display: 'flex', 
@@ -215,7 +215,7 @@ const OrderConfirmation = () => {
                     color: '#6b7280'
                   }}>
                     <span>Shipping:</span>
-                    <span>$5.99</span>
+                    <span>₹59</span>
                   </div>
                   <div style={{ 
                     display: 'flex', 
@@ -224,7 +224,7 @@ const OrderConfirmation = () => {
                     color: '#6b7280'
                   }}>
                     <span>Tax:</span>
-                    <span>${((parseFloat(order.total) - 5.99) * 0.08).toFixed(2)}</span>
+                    <span>₹{((parseFloat(order.total) - 59) * 0.08).toFixed(2)}</span>
                   </div>
                   <div style={{ 
                     display: 'flex', 
@@ -235,7 +235,7 @@ const OrderConfirmation = () => {
                     paddingTop: '12px'
                   }}>
                     <span>Total:</span>
-                    <span>${order.total}</span>
+                    <span>₹{order.total}</span>
                   </div>
                 </div>
               </div>

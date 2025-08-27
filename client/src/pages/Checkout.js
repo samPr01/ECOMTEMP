@@ -445,7 +445,7 @@ const Checkout = () => {
                         <span style={{ color: '#6b7280' }}> × {item.quantity}</span>
                       </div>
                       <span style={{ fontWeight: '600' }}>
-                        ${(item.product.price * item.quantity).toFixed(2)}
+                        ₹{(item.product.price * item.quantity).toFixed(2)}
                       </span>
                     </div>
                   ))}

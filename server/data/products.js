@@ -80,7 +80,7 @@ const generateProducts = () => {
       const brand = category.brands[Math.floor(Math.random() * category.brands.length)];
       const color = category.colors[Math.floor(Math.random() * category.colors.length)];
       
-      const basePrice = Math.floor(Math.random() * 200) + 20; // $20-$220
+      const basePrice = (Math.floor(Math.random() * 200) + 20) * 10; // ₹200-₹2200 (converted from USD to INR)
       const discount = Math.random() > 0.7 ? Math.floor(Math.random() * 30) + 5 : 0; // 30% chance of 5-35% discount
       const originalPrice = discount > 0 ? Math.floor(basePrice / (1 - discount / 100)) : basePrice;
       

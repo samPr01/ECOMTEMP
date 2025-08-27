@@ -32,13 +32,6 @@ const Header = () => {
 
   return (
     <header className="header">
-      <div className="header-top">
-        <div className="container">
-          <div className="text-center">
-            Free shipping on orders over $50 | 30-day returns | Customer support: 1-800-SS-STORE
-          </div>
-        </div>
-      </div>
       
       <div className="header-main">
         <div className="container">
@@ -65,54 +58,65 @@ const Header = () => {
                 {count > 0 && <span className="cart-count">{count}</span>}
               </Link>
               
-              {isAuthenticated ? (
-                <div className="user-menu">
-                  <button 
-                    className="user-button"
-                    onClick={() => setShowUserMenu(!showUserMenu)}
-                  >
-                    <FaUser />
-                    <span className="user-name">{user?.firstName}</span>
-                  </button>
-                  
-                  {showUserMenu && (
-                    <div className="user-dropdown">
-                      <Link 
-                        to="/profile" 
-                        className="dropdown-item"
-                        onClick={() => setShowUserMenu(false)}
-                      >
-                        <FaUser /> Profile
-                      </Link>
-                      {user?.role === 'admin' && (
+              {/* Single profile dropdown for both authenticated and non-authenticated users */}
+              <div className="user-menu">
+                <button 
+                  className="user-button"
+                  onClick={() => setShowUserMenu(!showUserMenu)}
+                >
+                  <FaUser />
+                  {isAuthenticated && <span className="user-name">{user?.firstName}</span>}
+                </button>
+                
+                {showUserMenu && (
+                  <div className="user-dropdown">
+                    {isAuthenticated ? (
+                      <>
                         <Link 
-                          to="/admin" 
+                          to="/profile" 
                           className="dropdown-item"
                           onClick={() => setShowUserMenu(false)}
                         >
-                          <FaStore /> Admin Panel
+                          <FaUser /> Profile
                         </Link>
-                      )}
-                      <LogoutButton 
-                        className="dropdown-item logout-item"
-                        showConfirmation={false}
-                        onClick={() => setShowUserMenu(false)}
-                      >
-                        <FaSignOutAlt /> Logout
-                      </LogoutButton>
-                    </div>
-                  )}
-                </div>
-              ) : (
-                <div className="auth-buttons">
-                  <Link to="/login" className="auth-button login-button">
-                    <FaUser /> Login
-                  </Link>
-                  <Link to="/register" className="auth-button register-button">
-                    <FaUserPlus /> Sign Up
-                  </Link>
-                </div>
-              )}
+                        {user?.role === 'admin' && (
+                          <Link 
+                            to="/admin" 
+                            className="dropdown-item"
+                            onClick={() => setShowUserMenu(false)}
+                          >
+                            <FaStore /> Admin Panel
+                          </Link>
+                        )}
+                        <LogoutButton 
+                          className="dropdown-item logout-item"
+                          showConfirmation={false}
+                          onClick={() => setShowUserMenu(false)}
+                        >
+                          <FaSignOutAlt /> Logout
+                        </LogoutButton>
+                      </>
+                    ) : (
+                      <>
+                        <Link 
+                          to="/login" 
+                          className="dropdown-item"
+                          onClick={() => setShowUserMenu(false)}
+                        >
+                          <FaUser /> Login
+                        </Link>
+                        <Link 
+                          to="/register" 
+                          className="dropdown-item"
+                          onClick={() => setShowUserMenu(false)}
+                        >
+                          <FaUserPlus /> Sign Up
+                        </Link>
+                      </>
+                    )}
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>

@@ -38,10 +38,10 @@ const ProductCard = ({ product }) => {
           <span className="rating-text">({product.reviews})</span>
         </div>
         <div className="product-price">
-          ${product.price}
+          ₹{product.price}
           {product.discount > 0 && (
             <>
-              <span className="product-original-price">${product.originalPrice}</span>
+              <span className="product-original-price">₹{product.originalPrice}</span>
               <span className="product-discount">{product.discount}% OFF</span>
             </>
           )}

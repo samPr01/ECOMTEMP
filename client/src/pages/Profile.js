@@ -465,11 +465,11 @@ const Profile = () => {
                 <div className="preference-item">
                   <h4>Currency</h4>
                   <p>Choose your preferred currency</p>
-                  <select defaultValue={user.preferences?.currency || 'USD'}>
+                  <select defaultValue={user.preferences?.currency || 'INR'}>
+                    <option value="INR">INR (₹)</option>
                     <option value="USD">USD ($)</option>
                     <option value="EUR">EUR (€)</option>
                     <option value="GBP">GBP (£)</option>
-                    <option value="INR">INR (₹)</option>
                   </select>
                 </div>
               </div>
